@@ -15,11 +15,17 @@
           </thead>
           <tbody>
             <tr v-for="alarm in alarms" :key="alarm.id">
-              <td>{{ alarm.name }}</td>
               <td>
+                <!-- 名稱 -->
+                {{ alarm.name }}
+              </td>
+              <td>
+                <!-- 試聽 -->
                 <audio :src="alarm.file" controls></audio>
               </td>
               <td>
+                <!-- 選擇 -->
+                <!-- v-model=> 選擇的值；:value => 該選項代表的值 -->
                 <v-radio-group v-model="selectedAlarm">
                   <v-radio :value="alarm.id"></v-radio>
                 </v-radio-group>
@@ -44,10 +50,13 @@ definePage({
 })
 
 const settings = useSettingsStore()
+// 解構（不用寫settings.xxxx）會失去響應姓，要用storeToRefs()維持響應性
 const { alarms, selectedAlarm } = storeToRefs(settings)
 </script>
 
 <style scoped lang="scss">
+// :deep() => 深層的選擇，表示選到元件裡面的元件樣式
+// 去除v-radio預設的空間
 :deep(.v-input__details) {
   display: none;
 }

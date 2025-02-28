@@ -13,6 +13,7 @@ const router = createRouter({
   extendRoutes: setupLayouts
 })
 
+// 把文件title標籤改成要去的那頁的meta.title
 router.afterEach((to, from) => {
   document.title = to.meta.title
 })
